@@ -32,5 +32,25 @@ task-board は React + TypeScript + Vite 製のシンプルなタスク管理ア
 
 - `main` へのpushをトリガーに `.github/workflows/deploy.yml` がビルドして GitHub Pages に自動デプロイする。
 - `vite.config.ts` の `base: '/task-board/'` はリポジトリ名に合わせたプロジェクトページ用のパス。リポジトリ名を変更した場合はここも合わせて変更すること。
-- 公開URL: `https://ken10-07.github.io/task-board/`
 - 初回のみ、GitHubリポジトリの Settings → Pages → Source を「GitHub Actions」に設定する必要がある（手動作業、Claude Codeからは実行不可）。
+
+## デプロイ先
+
+https://ken10-07.github.io/task-board/
+
+## 技術スタック
+
+- React 19 + TypeScript
+- Vite 8（ビルド/開発サーバー）
+- oxlint（Lint）
+- 状態管理: React標準の `useState` / `useEffect` のみ（外部の状態管理ライブラリは未使用）
+- 永続化: ブラウザの `localStorage`（バックエンド・APIなし）
+- スタイリング: プレーンCSS（CSSファイルを直接import、CSS-in-JSやCSSモジュールは未使用）
+
+## コンポーネントの命名規約
+
+- コンポーネントファイルはコンポーネント名と同じ PascalCase（例: `App.tsx`）。
+- コンポーネントに専用スタイルがある場合は、同名の CSS ファイルを同じディレクトリに置く（例: `App.tsx` ⇔ `App.css`）。
+- 型定義は `types.ts` のような camelCase のファイルにまとめ、型名自体は PascalCase（例: `Task`）にする。
+- props・state・関数名は camelCase（例: `toggleTask`, `deleteTask`）。イベントハンドラは `on〜` ではなく処理内容を表す動詞から始める（`addTask` など）。
+- グローバルなベーススタイルは `index.css`、エントリーポイントは `main.tsx` に集約する。
