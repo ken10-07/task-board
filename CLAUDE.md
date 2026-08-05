@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-task-board プロジェクト。現時点ではコードベースの構築前のため、技術スタックやディレクトリ構成が定まり次第、このセクションおよびビルド/テストコマンドのセクションを更新すること。
+task-board は React + TypeScript + Vite 製のシンプルなタスク管理アプリ。タスクの追加・完了切り替え・削除ができる。
 
 ## Git 運用ルール
 
@@ -16,13 +16,14 @@ task-board プロジェクト。現時点ではコードベースの構築前の
 
 ## コマンド
 
-技術スタックが決まり次第、以下を追記する:
-- 依存関係のインストール
-- ビルド
-- Lint / フォーマット
-- テスト実行（全体 / 単体テスト単体の実行方法）
-- 開発サーバーの起動
+- 依存関係のインストール: `npm install`
+- 開発サーバーの起動: `npm run dev`
+- ビルド: `npm run build`（`tsc -b` の型チェック後に `vite build`）
+- Lint: `npm run lint`（oxlint）
+- ビルドのプレビュー: `npm run preview`
 
 ## アーキテクチャ
 
-コードベースが構築され次第、複数ファイルにまたがる全体構成（主要モジュールの役割、データフロー、状態管理の方針など）をここに追記する。
+- `src/App.tsx` がタスクボードの全ロジック（追加・完了切り替え・削除）を持つ単一コンポーネント。状態は `useState<Task[]>` でメモリ上のみに保持し、永続化は行っていない。
+- `src/types.ts` の `Task` 型（`id` / `text` / `completed`）が唯一のデータモデル。
+- スタイルは `src/App.css`（タスクボード固有）と `src/index.css`（全体のベーススタイル）に分離。完了済みタスクは `.task.completed` クラスでグレー表示・取り消し線を付与している。
