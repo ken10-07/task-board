@@ -24,6 +24,6 @@ task-board は React + TypeScript + Vite 製のシンプルなタスク管理ア
 
 ## アーキテクチャ
 
-- `src/App.tsx` がタスクボードの全ロジック（追加・完了切り替え・削除）を持つ単一コンポーネント。状態は `useState<Task[]>` でメモリ上のみに保持し、永続化は行っていない。
+- `src/App.tsx` がタスクボードの全ロジック（追加・完了切り替え・削除）を持つ単一コンポーネント。状態は `useState<Task[]>` で保持し、`localStorage`（キー: `task-board.tasks`）に自動保存・復元することでリロード後も維持される。
 - `src/types.ts` の `Task` 型（`id` / `text` / `completed`）が唯一のデータモデル。
 - スタイルは `src/App.css`（タスクボード固有）と `src/index.css`（全体のベーススタイル）に分離。完了済みタスクは `.task.completed` クラスでグレー表示・取り消し線を付与している。
