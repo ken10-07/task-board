@@ -27,3 +27,10 @@ task-board は React + TypeScript + Vite 製のシンプルなタスク管理ア
 - `src/App.tsx` がタスクボードの全ロジック（追加・完了切り替え・削除）を持つ単一コンポーネント。状態は `useState<Task[]>` で保持し、`localStorage`（キー: `task-board.tasks`）に自動保存・復元することでリロード後も維持される。
 - `src/types.ts` の `Task` 型（`id` / `text` / `completed`）が唯一のデータモデル。
 - スタイルは `src/App.css`（タスクボード固有）と `src/index.css`（全体のベーススタイル）に分離。完了済みタスクは `.task.completed` クラスでグレー表示・取り消し線を付与している。
+
+## デプロイ（GitHub Pages）
+
+- `main` へのpushをトリガーに `.github/workflows/deploy.yml` がビルドして GitHub Pages に自動デプロイする。
+- `vite.config.ts` の `base: '/task-board/'` はリポジトリ名に合わせたプロジェクトページ用のパス。リポジトリ名を変更した場合はここも合わせて変更すること。
+- 公開URL: `https://ken10-07.github.io/task-board/`
+- 初回のみ、GitHubリポジトリの Settings → Pages → Source を「GitHub Actions」に設定する必要がある（手動作業、Claude Codeからは実行不可）。
